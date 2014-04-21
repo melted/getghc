@@ -118,6 +118,14 @@ function install-7zip() {
     }
 }
 
+function download-cabal {
+    $url=" http://www.haskell.org/cabal/release/cabal-install-1.18.0.2/cabal.exe"
+    $file="downloads\cabal.exe"
+    $hash="776AAF4626993FB308E3168944A465235B0DA9A5"
+    if (get-tarball $url $file $hash) {
+    }
+}
+
 
 function run-msys-installscrips() {
     .\msys32\bin\mintty.exe .\install.sh
@@ -138,5 +146,6 @@ echo "Getting msys64"
 install-msys64
 echo "Getting bootstrap GHC 64-bit"
 install-ghc64
+download-cabal
 echo "Starting msys configuration"
 run-msys-installscrips
