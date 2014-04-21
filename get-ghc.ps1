@@ -1,5 +1,14 @@
-﻿$current_dir = pwd
-$msys = 64
+﻿# A Powershell script for setting up a GHC build environment
+# by Niklas Larsson <niklas@mm.st>
+#
+# This script automates this procedure from the GHC Wiki:
+# https://ghc.haskell.org/trac/ghc/wiki/Building/Preparation/Windows/MSYS2
+# For best results, run it in an empty directory.
+#
+# This file has been placed in the public domain by the author.
+
+$current_dir = pwd
+$msys = 64 # Change to 32 to build a 32-bit GHC
 
 function get-tarball {
     param([string]$url, [string]$outfile, [string]$hash)
@@ -147,6 +156,8 @@ function run-msys-installscrips {
 "@
     echo $bash_paths | Out-File -Encoding ascii temp.sh
     .\msys\bin\bash -l -c "$current_posix/temp.sh"
+    # Do the installations one at a time, pacman on msys2 tends to flake out
+    # for some forking reason. A new bash helps.
     .\msys\bin\bash -l -c "pacman -Syu --noconfirm"
     .\msys\bin\bash -l -c "pacman -S --noconfirm git"
     .\msys\bin\bash -l -c "pacman -S --noconfirm curl"
