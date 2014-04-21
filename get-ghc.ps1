@@ -122,6 +122,7 @@ function install-7zip() {
 function run-msys-installscrips() {
     .\msys32\bin\mintty.exe .\install.sh
     .\msys64\bin\mintty.exe .\install.sh
+    .\msys64\bin\mintty.exe .\ghc.sh # Share the source tree
 }
 
 create-dirs
