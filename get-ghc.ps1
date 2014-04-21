@@ -114,7 +114,7 @@ function install-7zip() {
     $file="downloads\7z.zip"
     $hash="9CE9CE89EBC070FEA5D679936F21F9DDE25FAAE0"
     if (get-tarball $url $file $hash) {
-        $dir = "$current_dir\support\7z"
+        $dir = "$current_dir\support"
         $abs_file = "$current_dir\$file"
         create-dir $dir
         Extract-Zip $abs_file $dir
@@ -131,7 +131,8 @@ function download-cabal {
 
 
 function run-msys-installscrips {
-    $current_posix=.\msys\bin\cygpath.exe -u $current_dir
+    .\msys\bin\bash -l -c "exit"
+     $current_posix=.\msys\bin\cygpath.exe -u $current_dir
     .\msys\bin\bash -l -c "$current_posix/install.sh"
     .\msys\bin\bash -l -c "$current_posix/install2.sh"
     .\msys\bin\bash -l -c "$current_posix/ghc.sh"
