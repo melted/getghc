@@ -1,7 +1,7 @@
 ﻿# A Powershell script for setting up a GHC build environment
 # by Niklas Larsson <niklas@mm.st>
 #
-# This script automates this procedure from the GHC Wiki:
+# This script automates the setup procedure from the GHC Wiki:
 # https://ghc.haskell.org/trac/ghc/wiki/Building/Preparation/Windows/MSYS2
 # For best results, run it in an empty directory.
 #
@@ -171,8 +171,8 @@ function run-msys-installscrips {
     .\msys\bin\bash -l -c "pacman -S --noconfirm xz"
     .\msys\bin\bash -l -c "cp $current_posix/downloads/cabal.exe ~/bin"
     $ghc_cmds=@"
-    cabal update
-    cabal install alex happy
+    ~/bin/cabal update
+    ~/bin/cabal install alex happy
     git clone https://github.com/ghc/ghc.git
     cd ghc && ./sync-all --nofib --extra get
     ./boot
@@ -197,6 +197,7 @@ if($msys -eq 32) {
     echo "Getting bootstrap GHC 64-bit"
     install-ghc64
 }
+echo "Getting cabal.exe"
 download-cabal
 echo "Starting msys configuration"
 run-msys-installscrips
