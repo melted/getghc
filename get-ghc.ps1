@@ -148,11 +148,12 @@ function run-msys-installscrips {
     $bash_paths=@"
         mkdir -p ~/bin
         export PYTHONDIR="$($current_posix)/python-2.7"
-        echo 'export PATH=/ghc-7.6.3/bin:`$PATH'       >> ~/.bashrc
-        echo 'export PATH=/ghc-7.6.3/mingw/bin:`$PATH' >> ~/.bashrc
-        echo 'export PATH=`$HOME/bin:`$PATH'            >> ~/.bashrc
-        echo 'export PATH='`$PYTHONDIR':`$PATH' >> ~/.bashrc
-        echo 'export PATH=$($win_home)/AppData/Roaming/cabal/bin:`$PATH' >> ~/.bashrc
+        echo 'export LC_ALL=C' >> ~/.bash_profile
+        echo 'export PATH=/ghc-7.6.3/bin:`$PATH'       >> ~/.bash_profile
+        echo 'export PATH=/ghc-7.6.3/mingw/bin:`$PATH' >> ~/.bash_profile
+        echo 'export PATH=`$HOME/bin:`$PATH'            >> ~/.bash_profile
+        echo 'export PATH='`$PYTHONDIR':`$PATH' >> ~/.bash_profile
+        echo 'export PATH=$($win_home)/AppData/Roaming/cabal/bin:`$PATH' >> ~/.bash_profile
 "@
     echo $bash_paths | Out-File -Encoding ascii temp.sh
     .\msys\bin\bash -l -c "$current_posix/temp.sh"
@@ -160,7 +161,6 @@ function run-msys-installscrips {
     # for some forking reason. A new bash helps.
     .\msys\bin\bash -l -c "pacman -Syu --noconfirm"
     .\msys\bin\bash -l -c "pacman -S --noconfirm git"
-    .\msys\bin\bash -l -c "pacman -S --noconfirm curl"
     .\msys\bin\bash -l -c "pacman -S --noconfirm tar"
     .\msys\bin\bash -l -c "pacman -S --noconfirm gzip"
     .\msys\bin\bash -l -c "pacman -S --noconfirm binutils"
