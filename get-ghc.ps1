@@ -141,9 +141,9 @@ function run-msys-installscrips {
         export PYTHONDIR="$($current_posix)/python-2.7"
         echo 'export PATH=/ghc-7.6.3/bin:`$PATH'       >> ~/.bashrc
         echo 'export PATH=/ghc-7.6.3/mingw/bin:`$PATH' >> ~/.bashrc
-        echo 'export PATH=$HOME/bin:`$PATH'            >> ~/.bashrc
+        echo 'export PATH=`$HOME/bin:`$PATH'            >> ~/.bashrc
         echo 'export PATH='`$PYTHONDIR':`$PATH' >> ~/.bashrc
-        echo 'export PATH='$($win_home)/AppData/Roaming/cabal/bin:`$PATH' >> ~/.bashrc
+        echo 'export PATH=$($win_home)/AppData/Roaming/cabal/bin:`$PATH' >> ~/.bashrc
 "@
     echo $bash_paths | Out-File -Encoding ascii temp.sh
     .\msys\bin\bash -l -c "$current_posix/temp.sh"
