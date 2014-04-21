@@ -130,11 +130,43 @@ function download-cabal {
 }
 
 
+
 function run-msys-installscrips {
     .\msys\bin\bash -l -c "exit"
      $current_posix=.\msys\bin\cygpath.exe -u $current_dir
-    .\msys\bin\bash -l -c "$current_posix/install.sh"
-    .\msys\bin\bash -l -c "$current_posix/install2.sh"
+     $win_home = .\msys\bin\cygpath.exe -u $HOME
+
+    $bash_paths=@"
+        mkdir -p ~/bin
+        export PYTHONDIR="$($current_posix)/python-2.7"
+        echo 'export PATH=/ghc-7.6.3/bin:`$PATH'       >> ~/.bashrc
+        echo 'export PATH=/ghc-7.6.3/mingw/bin:`$PATH' >> ~/.bashrc
+        echo 'export PATH=$HOME/bin:`$PATH'            >> ~/.bashrc
+        echo 'export PATH='`$PYTHONDIR':`$PATH' >> ~/.bashrc
+        echo 'export PATH='$($win_home)/AppData/Roaming/cabal/bin:`$PATH' >> ~/.bashrc
+"@
+    echo $bash_paths | Out-File -Encoding ascii temp.sh
+    .\msys\bin\bash -l -c "$current_posix/temp.sh"
+    .\msys\bin\bash -l -c "pacman -Syu --noconfirm"
+    .\msys\bin\bash -l -c "pacman -S --noconfirm git"
+    .\msys\bin\bash -l -c "pacman -S --noconfirm curl"
+    .\msys\bin\bash -l -c "pacman -S --noconfirm tar"
+    .\msys\bin\bash -l -c "pacman -S --noconfirm gzip"
+    .\msys\bin\bash -l -c "pacman -S --noconfirm binutils"
+    .\msys\bin\bash -l -c "pacman -S --noconfirm autoconf"
+    .\msys\bin\bash -l -c "pacman -S --noconfirm make"
+    .\msys\bin\bash -l -c "pacman -S --noconfirm libtool"
+    .\msys\bin\bash -l -c "pacman -S --noconfirm automake"
+    .\msys\bin\bash -l -c "pacman -S --noconfirm xz"
+    .\msys\bin\bash -l -c "cp $current_posix/downloads/cabal.exe ~/bin"
+    $ghc_cmds=@"
+    cabal update
+    cabal install alex happy
+    git clone https://github.com/ghc/ghc.git
+    cd ghc && ./sync-all --nofib --extra get
+    ./boot
+"@
+    echo $ghc_cmds | Out-File -Encoding ascii ghc.sh
     .\msys\bin\bash -l -c "$current_posix/ghc.sh"
 }
 
@@ -154,5 +186,6 @@ if($msys -eq 32) {
     echo "Getting bootstrap GHC 64-bit"
     install-ghc64
 }
+download-cabal
 echo "Starting msys configuration"
 run-msys-installscrips
