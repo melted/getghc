@@ -120,11 +120,8 @@ function install-7zip() {
 
 
 function run-msys-installscrips() {
-    
-}
-
-function create-buildscripts() {
-    
+    .\msys32\bin\mintty.exe .\install.sh
+    .\msys64\bin\mintty.exe .\install.sh
 }
 
 create-dirs
@@ -141,3 +138,4 @@ install-msys64
 echo "Getting bootstrap GHC 64-bit"
 install-ghc64
 echo "Starting msys configuration"
+run-msys-installscrips
