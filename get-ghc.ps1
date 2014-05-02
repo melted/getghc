@@ -73,9 +73,9 @@ function install-python() {
 }
 
 function install-ghc32 {
-    $url="http://www.haskell.org/ghc/dist/7.6.3/ghc-7.6.3-i386-unknown-mingw32.tar.bz2"
-    $file="downloads\ghc32.tar.bz"
-    $hash="8729A1D7E73D69CE6CFA6E5519D6710F53A57064"
+    $url="http://www.haskell.org/ghc/dist/7.8.2/ghc-7.8.2-i386-unknown-mingw32.tar.xz"
+    $file="downloads\ghc32.tar.xz"
+    $hash="87C8F37EF3C4A7266043B18F2AE869C551681EF3"
     if(get-tarball $url $file $hash) {
         .\support\7za x -y $file
         .\support\7za x -y ghc32.tar -omsys
@@ -96,9 +96,9 @@ function install-msys32() {
 }
 
 function install-ghc64 {
-    $url="http://www.haskell.org/ghc/dist/7.6.3/ghc-7.6.3-x86_64-unknown-mingw32.tar.bz2"
-    $file="downloads\ghc64.tar.bz2"
-    $hash="758AC43AA13474C55F7FC25B9B19E47F93FD7E99"
+    $url="http://www.haskell.org/ghc/dist/7.8.2/ghc-7.8.2-x86_64-unknown-mingw32.tar.xz"
+    $file="downloads\ghc64.tar.xz"
+    $hash="B512690BFACD446DDE0C98302013DCAFCE4535A9"
     if(get-tarball $url $file $hash) {
         .\support\7za x -y $file
         .\support\7za x -y ghc64.tar -omsys
@@ -149,8 +149,7 @@ function run-msys-installscrips {
         mkdir -p ~/bin
         export PYTHONDIR="$($current_posix)/python-2.7"
         echo 'export LC_ALL=C' >> ~/.bash_profile
-        echo 'export PATH=/ghc-7.6.3/bin:`$PATH'       >> ~/.bash_profile
-        echo 'export PATH=/ghc-7.6.3/mingw/bin:`$PATH' >> ~/.bash_profile
+        echo 'export PATH=/ghc-7.8.2/bin:`$PATH'       >> ~/.bash_profile
         echo 'export PATH=`$HOME/bin:`$PATH'            >> ~/.bash_profile
         echo 'export PATH='`$PYTHONDIR':`$PATH' >> ~/.bash_profile
         echo 'export PATH=$($win_home)/AppData/Roaming/cabal/bin:`$PATH' >> ~/.bash_profile
