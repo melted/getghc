@@ -86,9 +86,9 @@ function install-python() {
 }
 
 function install-ghc32 {
-    $url="http://www.haskell.org/ghc/dist/7.8.2/ghc-7.8.2-i386-unknown-mingw32.tar.xz"
+    $url="https://www.haskell.org/ghc/dist/7.8.3/ghc-7.8.3-i386-unknown-mingw32.tar.xz"
     $file="downloads\ghc32.tar.xz"
-    $hash="87C8F37EF3C4A7266043B18F2AE869C551681EF3"
+    $hash="10ed53deddd356efcca4ad237bdd0e5a5102fb11"
     if(get-tarball $url $file $hash) {
         .\support\7za x -y $file
         .\support\7za x -y ghc32.tar -omsys
@@ -109,9 +109,9 @@ function install-msys32() {
 }
 
 function install-ghc64 {
-    $url="http://www.haskell.org/ghc/dist/7.8.2/ghc-7.8.2-x86_64-unknown-mingw32.tar.xz"
+    $url="https://www.haskell.org/ghc/dist/7.8.3/ghc-7.8.3-x86_64-unknown-mingw32.tar.xz"
     $file="downloads\ghc64.tar.xz"
-    $hash=" B512690BFACD446DDE0C98302013DCAFCE4535A9"
+    $hash="e18e279e98768c70839a0ef606d55cb733e362dc"
     if(get-tarball $url $file $hash) {
         .\support\7za x -y $file
         .\support\7za x -y ghc64.tar -omsys
