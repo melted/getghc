@@ -154,7 +154,7 @@ function download-cabal {
 
 
 function run-msys-installscrips {
-    .\msys\bin\bash -l -c "exit"
+    .\msys\bin\bash -l -c "exit" | Out-Null
      $current_posix=.\msys\bin\cygpath.exe -u $current_dir
      $win_home = .\msys\bin\cygpath.exe -u $HOME
 
