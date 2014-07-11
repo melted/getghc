@@ -149,7 +149,7 @@ function run-msys-installscrips {
         mkdir -p ~/bin
         export PYTHONDIR="$($current_posix)/python-2.7"
         echo 'export LC_ALL=C' >> ~/.bash_profile
-        echo 'export PATH=/ghc-7.8.2/bin:`$PATH'       >> ~/.bash_profile
+        echo 'export PATH=/ghc-7.8.3/bin:`$PATH'       >> ~/.bash_profile
         echo 'export PATH=`$HOME/bin:`$PATH'            >> ~/.bash_profile
         echo 'export PATH='`$PYTHONDIR':`$PATH' >> ~/.bash_profile
         echo 'export PATH=$($win_home)/AppData/Roaming/cabal/bin:`$PATH' >> ~/.bash_profile
