@@ -172,7 +172,7 @@ function run-msys-installscrips {
     $ghc_cmds=@"
     ~/bin/cabal update
     ~/bin/cabal install alex happy
-    git clone https://github.com/ghc/ghc.git
+    git clone git://github.com/ghc/ghc.git
     cd ghc && ./sync-all --nofib --extra get
     ./boot
 "@
